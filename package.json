@@ -6,12 +6,12 @@
     "test": "vitest run",
     "clean": "rm -rf build",
     "build": "npm run clean && tsc -p tsconfig.json",
-    "prepublish": "npm run build",
     "typecheck:watch": "tsc --noEmit -w -p tsconfig.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{ts,mjs,json,md}\"",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [],
   "author": "tsforge",
@@ -35,6 +35,7 @@
   "types": "build/index.d.ts",
   "files": [
     "build",
-    "!build/**/*.spec.*"
+    "!build/**/*.spec.*",
+    "!build/vitest.config.*"
   ]
 }
