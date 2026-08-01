@@ -1,5 +1,14 @@
 # Platega SDK
 
+![npm version](https://img.shields.io/npm/v/@tsforge7/platega-sdk)
+![Downloads](https://img.shields.io/npm/dt/@tsforge7/platega-sdk)
+![License](https://img.shields.io/npm/l/@tsforge7/platega-sdk)
+![Build Status](https://img.shields.io/github/actions/workflow/status/tsforge/platega-sdk/deploy-lib.yml)
+![Types](https://img.shields.io/npm/types/@tsforge7/platega-sdk)
+![Node](https://img.shields.io/node/v/@tsforge7/platega-sdk)
+![npm minzip size](https://img.shields.io/bundlephobia/minzip/@tsforge7/platega-sdk)
+![Last Update](https://img.shields.io/npm/last-update/@tsforge7/platega-sdk)
+
 **English** | [Русский](./README.ru.md)
 
 TypeScript SDK for the [Platega](https://platega.io) payment system: accept payments (SBP, cards, ERIP, crypto), check statuses, cancel transactions, pay out to cards and verify callbacks.

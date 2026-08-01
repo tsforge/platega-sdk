@@ -45,5 +45,8 @@
   "homepage": "https://github.com/tsforge/platega-sdk#readme",
   "bugs": {
     "url": "https://github.com/tsforge/platega-sdk/issues"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
