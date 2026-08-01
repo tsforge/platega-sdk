@@ -1,6 +1,6 @@
 {
   "name": "@tsforge7/platega-sdk",
-  "version": "0.0.1",
+  "version": "0.1.6",
   "description": "platega sdk",
   "scripts": {
     "test": "vitest run",
@@ -37,5 +37,13 @@
     "build",
     "!build/**/*.spec.*",
     "!build/vitest.config.*"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsforge/platega-sdk.git"
+  },
+  "homepage": "https://github.com/tsforge/platega-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/tsforge/platega-sdk/issues"
+  }
 }
