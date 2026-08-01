@@ -1,0 +1,106 @@
+name: Deploy lib
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  notify-start:
+    name: Notify deploy started
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          disable_web_page_preview: true
+          message: |
+            🚀 *Platega SDK — публикация начата*
+
+            📦 Пакет: `@taforge7/platega-sdk`
+            _TypeScript SDK для платёжной системы Platega: платежи, статусы, возвраты, выводы, callback'и_
+
+            🏷 Версия: `${{ github.ref_name }}`
+            👤 Автор: ${{ github.actor }}
+            🔀 Коммит: `${{ github.sha }}`
+
+            [Репозиторий](https://github.com/${{ github.repository }}) • [Ход сборки](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+  build:
+    name: Test, build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish package on NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  notify-success:
+    name: Notify published
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          disable_web_page_preview: true
+          message: |
+            ✅ *Platega SDK ${{ github.ref_name }} опубликован в npm*
+
+            📦 `npm install @taforge7/platega-sdk@${{ github.ref_name }}`
+
+            👤 Автор релиза: ${{ github.actor }}
+            🔀 Коммит: `${{ github.sha }}`
+
+            [Пакет в npm](https://www.npmjs.com/package/@taforge7/platega-sdk) • [Репозиторий](https://github.com/${{ github.repository }})
+
+  notify-error:
+    name: Notify failure
+    needs: [build]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send error notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          disable_web_page_preview: true
+          message: |
+            ❌ *Platega SDK ${{ github.ref_name }} — публикация упала*
+
+            Один из шагов (тесты / линт / сборка / publish) завершился с ошибкой.
+
+            👤 Автор: ${{ github.actor }}
+            🔀 Коммит: `${{ github.sha }}`
+
+            [Смотреть логи](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
