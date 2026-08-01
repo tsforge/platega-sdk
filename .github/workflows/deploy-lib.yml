@@ -11,23 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Telegram message
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
-          disable_web_page_preview: true
-          message: |
-            🚀 *Platega SDK — публикация начата*
+        run: |
+          TEXT=$(cat <<'EOF'
+          🚀 *Platega SDK — публикация начата*
 
-            📦 Пакет: `@tsforge7/platega-sdk`
-            _TypeScript SDK для платёжной системы Platega: платежи, статусы, возвраты, выводы, callback'и_
+          📦 Пакет: `@tsforge7/platega-sdk`
+          _TypeScript SDK для платёжной системы Platega: платежи, статусы, возвраты, выводы, callback'и_
 
-            🏷 Версия: `${{ github.ref_name }}`
-            👤 Автор: ${{ github.actor }}
-            🔀 Коммит: `${{ github.sha }}`
+          🏷 Версия: `${{ github.ref_name }}`
+          👤 Автор: ${{ github.actor }}
+          🔀 Коммит: `${{ github.sha }}`
 
-            [Репозиторий](https://github.com/${{ github.repository }}) • [Ход сборки](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          [Репозиторий](https://github.com/${{ github.repository }}) • [Ход сборки](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          EOF
+          )
+          curl -sS "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d message_thread_id="${{ secrets.TELEGRAM_THREAD_ID }}" \
+            -d parse_mode="Markdown" \
+            -d disable_web_page_preview=true \
+            --data-urlencode "text=${TEXT}"
 
   build:
     name: Test, build and publish
@@ -66,21 +69,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Telegram message
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
-          disable_web_page_preview: true
-          message: |
-            ✅ *Platega SDK ${{ github.ref_name }} опубликован в npm*
+        run: |
+          TEXT=$(cat <<'EOF'
+          ✅ *Platega SDK ${{ github.ref_name }} опубликован в npm*
 
-            📦 `npm install @tsforge7/platega-sdk@${{ github.ref_name }}`
+          📦 `npm install @tsforge7/platega-sdk@${{ github.ref_name }}`
 
-            👤 Автор релиза: ${{ github.actor }}
-            🔀 Коммит: `${{ github.sha }}`
+          👤 Автор релиза: ${{ github.actor }}
+          🔀 Коммит: `${{ github.sha }}`
 
-            [Пакет в npm](https://www.npmjs.com/package/@tsforge7/platega-sdk) • [Репозиторий](https://github.com/${{ github.repository }})
+          [Пакет в npm](https://www.npmjs.com/package/@tsforge7/platega-sdk) • [Репозиторий](https://github.com/${{ github.repository }})
+          EOF
+          )
+          curl -sS "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d message_thread_id="${{ secrets.TELEGRAM_THREAD_ID }}" \
+            -d parse_mode="Markdown" \
+            -d disable_web_page_preview=true \
+            --data-urlencode "text=${TEXT}"
 
   notify-error:
     name: Notify failure
@@ -89,18 +95,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send error notification
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
-          disable_web_page_preview: true
-          message: |
-            ❌ *Platega SDK ${{ github.ref_name }} — публикация упала*
+        run: |
+          TEXT=$(cat <<'EOF'
+          ❌ *Platega SDK ${{ github.ref_name }} — публикация упала*
 
-            Один из шагов (тесты / линт / сборка / publish) завершился с ошибкой.
+          Один из шагов (тесты / линт / сборка / publish) завершился с ошибкой.
 
-            👤 Автор: ${{ github.actor }}
-            🔀 Коммит: `${{ github.sha }}`
+          👤 Автор: ${{ github.actor }}
+          🔀 Коммит: `${{ github.sha }}`
 
-            [Смотреть логи](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          [Смотреть логи](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          EOF
+          )
+          curl -sS "https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d message_thread_id="${{ secrets.TELEGRAM_THREAD_ID }}" \
+            -d parse_mode="Markdown" \
+            -d disable_web_page_preview=true \
+            --data-urlencode "text=${TEXT}"
