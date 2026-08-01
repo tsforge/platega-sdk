@@ -13,6 +13,8 @@
 
 TypeScript SDK for the [Platega](https://platega.io) payment system: accept payments (SBP, cards, ERIP, crypto), check statuses, cancel transactions, pay out to cards and verify callbacks.
 
+Using NestJS? There is a ready-made wrapper: [platega-sdk-nestjs](https://github.com/tsforge/platega-sdk-nestjs).
+
 [Official Platega documentation](https://docs.platega.io)
 
 ---
