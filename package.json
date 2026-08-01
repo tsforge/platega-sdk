@@ -1,6 +1,6 @@
 {
   "name": "@tsforge7/platega-sdk",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "platega sdk",
   "scripts": {
     "test": "vitest run",
