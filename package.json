@@ -14,7 +14,7 @@
     "test:watch": "vitest"
   },
   "keywords": [],
-  "author": "taforge",
+  "author": "tsforge",
   "license": "ISC",
   "dependencies": {
     "zod": "^4.4.3"
