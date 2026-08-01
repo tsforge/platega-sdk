@@ -6,7 +6,7 @@
 ![Build Status](https://img.shields.io/github/actions/workflow/status/tsforge/platega-sdk/deploy-lib.yml)
 ![Types](https://img.shields.io/npm/types/@tsforge7/platega-sdk)
 ![Node](https://img.shields.io/node/v/@tsforge7/platega-sdk)
-![npm minzip size](https://img.shields.io/bundlephobia/minzip/@tsforge7/platega-sdk)
+![npm unpacked size](https://img.shields.io/npm/unpacked-size/@tsforge7/platega-sdk)
 ![Last Update](https://img.shields.io/npm/last-update/@tsforge7/platega-sdk)
 
 [English](./README.md) | **Русский**
