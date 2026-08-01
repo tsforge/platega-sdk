@@ -45,7 +45,7 @@ TypeScript SDK for the [Platega](https://platega.io) payment system: accept paym
 ## Installation
 
 ```bash
-npm install @taforge7/platega-sdk
+npm install @tsforge7/platega-sdk
 ```
 
 Requirements: Node.js 18+ (the built-in `fetch` is used).
@@ -64,7 +64,7 @@ You need two values — your Platega manager provides them during onboarding, an
 ## Quick start: accept your first payment
 
 ```typescript
-import { Platega } from '@taforge7/platega-sdk';
+import { Platega } from '@tsforge7/platega-sdk';
 
 // 1. Create a client (once per application)
 const platega = new Platega({
@@ -141,7 +141,7 @@ const payment = await platega.payments.create({
 | 13   | `PAYMENT_METHOD.CRYPTO`         | Cryptocurrency           |
 
 ```typescript
-import { PAYMENT_METHOD } from '@taforge7/platega-sdk';
+import { PAYMENT_METHOD } from '@tsforge7/platega-sdk';
 
 await platega.payments.create({ paymentMethod: PAYMENT_METHOD.SBP, ... });
 ```
@@ -294,7 +294,7 @@ When a transaction status changes, Platega sends a **POST** to your URL. What yo
 
 ```typescript
 import express from 'express';
-import { Platega, TransactionCallbackCommand } from '@taforge7/platega-sdk';
+import { Platega, TransactionCallbackCommand } from '@tsforge7/platega-sdk';
 
 const app = express();
 app.use(express.json());
@@ -404,7 +404,7 @@ import {
     buildPgHmacStringToSign,
     buildPgHmacSignature,
     buildPgHmacAuthorizationHeader, // PG-HMAC
-} from '@taforge7/platega-sdk';
+} from '@tsforge7/platega-sdk';
 ```
 
 Every API method is described by zod schemas inside namespace commands (`CreatePaymentCommand`, `GetTransactionCommand`, ...) — all request/response types are inferred from them (`ICreatePaymentInput`, `IGetTransactionResponse`, etc.).

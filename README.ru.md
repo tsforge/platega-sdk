@@ -45,7 +45,7 @@ TypeScript SDK для платёжной системы [Platega](https://plateg
 ## Установка
 
 ```bash
-npm install @taforge7/platega-sdk
+npm install @tsforge7/platega-sdk
 ```
 
 Требования: Node.js 18+ (используется встроенный `fetch`).
@@ -64,7 +64,7 @@ npm install @taforge7/platega-sdk
 ## Быстрый старт: принять первый платёж
 
 ```typescript
-import { Platega } from '@taforge7/platega-sdk';
+import { Platega } from '@tsforge7/platega-sdk';
 
 // 1. Создаём клиент (один раз на всё приложение)
 const platega = new Platega({
@@ -141,7 +141,7 @@ const payment = await platega.payments.create({
 | 13  | `PAYMENT_METHOD.CRYPTO`         | Криптовалюта                     |
 
 ```typescript
-import { PAYMENT_METHOD } from '@taforge7/platega-sdk';
+import { PAYMENT_METHOD } from '@tsforge7/platega-sdk';
 
 await platega.payments.create({ paymentMethod: PAYMENT_METHOD.SBP, ... });
 ```
@@ -294,7 +294,7 @@ const allCards = await platega.withdrawals.getSavedCards({ onlyActive: false });
 
 ```typescript
 import express from 'express';
-import { Platega, TransactionCallbackCommand } from '@taforge7/platega-sdk';
+import { Platega, TransactionCallbackCommand } from '@tsforge7/platega-sdk';
 
 const app = express();
 app.use(express.json());
@@ -404,7 +404,7 @@ import {
     buildPgHmacStringToSign,
     buildPgHmacSignature,
     buildPgHmacAuthorizationHeader, // PG-HMAC
-} from '@taforge7/platega-sdk';
+} from '@tsforge7/platega-sdk';
 ```
 
 Каждый метод API описан zod-схемами в namespace-командах (`CreatePaymentCommand`, `GetTransactionCommand`, ...) — из них же выводятся все типы запросов/ответов (`ICreatePaymentInput`, `IGetTransactionResponse` и т.д.).

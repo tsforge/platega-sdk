@@ -20,7 +20,7 @@ jobs:
           message: |
             🚀 *Platega SDK — публикация начата*
 
-            📦 Пакет: `@taforge7/platega-sdk`
+            📦 Пакет: `@tsforge7/platega-sdk`
             _TypeScript SDK для платёжной системы Platega: платежи, статусы, возвраты, выводы, callback'и_
 
             🏷 Версия: `${{ github.ref_name }}`
@@ -75,12 +75,12 @@ jobs:
           message: |
             ✅ *Platega SDK ${{ github.ref_name }} опубликован в npm*
 
-            📦 `npm install @taforge7/platega-sdk@${{ github.ref_name }}`
+            📦 `npm install @tsforge7/platega-sdk@${{ github.ref_name }}`
 
             👤 Автор релиза: ${{ github.actor }}
             🔀 Коммит: `${{ github.sha }}`
 
-            [Пакет в npm](https://www.npmjs.com/package/@taforge7/platega-sdk) • [Репозиторий](https://github.com/${{ github.repository }})
+            [Пакет в npm](https://www.npmjs.com/package/@tsforge7/platega-sdk) • [Репозиторий](https://github.com/${{ github.repository }})
 
   notify-error:
     name: Notify failure
